@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class Notes extends Controller
 {
+    // main app
     public function index() {
         $notes = ModelsNotes::all();
         return view('notes', compact('notes'));
