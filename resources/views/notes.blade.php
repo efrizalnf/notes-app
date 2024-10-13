@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.template')
+@section('container')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes Apps</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-</head>
-
-<body class="container">
-    <h1>TODO LIST ME</h1>
-    <div class="recyclebin">
-        <a href="{{ route('recycle_bin') }}">Tong sampah</a>
-    </div>
-    <table cellpadding="10" border="1" class="table">
+<div class="container">
+    <h1 class="has-text-centered h1 is-size-1">TODO LIST ME</h1>
+    <a href="{{ route('recycle_bin') }}" class="button is-info m-3">Tong sampah</a>
+    <a href="{{ route('add-note') }}" rel="noopener noreferrer" class="button is-info m-3">Tambah</a>
+    <table cellpadding="10" border="1" class="table is-bordered">
         <tr>
             <th>No</th>
             <th>Title</th>
@@ -36,7 +28,7 @@
         </tr>
         @endforeach
     </table>
-    <a href="{{ route('add-note') }}" rel="noopener noreferrer">Tambah</a>
-</body>
+    
+</div>
 
-</html>
+@endsection

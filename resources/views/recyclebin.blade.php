@@ -1,3 +1,6 @@
+@extends('layout.template')
+@section('container')
+
 <div class="container">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     {{-- <form action="post" action="{{ route('delete-all') }}">
@@ -5,9 +8,10 @@
         @method('DELETE')
         <button type="submit">Delete Semua Data</button>
     </form> --}}
+    <a href="{{ route('note-lists') }}">Kembali</a>
     <a href="{{ route('delete-all') }}" class="m-3">Delete Semua data</a>
     <a href="{{ route('restore-all') }}" class="m-3">Restore Semua data</a>
-    <table cellpadding="10" border="1">
+    <table cellpadding="10" border="1" class="table is-bordered">
         <tr>
             <th>No</th>
             <th>Title</th>
@@ -30,3 +34,4 @@
         @endforeach
     </table>
 </div>
+@endsection
