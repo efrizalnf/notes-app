@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notes as ModelsNotes;
+use App\Models\User;
 use Illuminate\Http\Request;
-
 class Notes extends Controller
 {
     // main app
     public function index() {
         $notes = ModelsNotes::all();
+        $user = User::all();
+        // @dd($user[0]['name']);
+        session()->put('user',$user);
+        
         return view('notes', compact('notes'));
     }
     
@@ -31,6 +35,8 @@ class Notes extends Controller
     public function editnotes($id)
     {
         $data =  ModelsNotes::find($id);
+        $sesi = session()->get('user');
+        // @dd($sesi[0]['name']);
         return view('add-notes', compact('data'));
     }
 

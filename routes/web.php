@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::resource('notes', Notes::class);
 Route::controller(Notes::class)->group(function() {
-    Route::get('notes', 'index')->name('note-lists');
+    Route::get('/', 'index')->name('note-lists');
     Route::get('notes/addnotes', 'addnotes')->name('add-note');
     Route::post('notes/savenote', 'save_note')->name('save-note');
     Route::get('notes/edit/{id}', 'editnotes')->name('edit-note');
