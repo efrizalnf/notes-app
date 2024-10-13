@@ -63,4 +63,36 @@ class Notes extends Controller
             return redirect()->route('note-lists')->with('error', 'Catatan tidak ditemukan!');
         }
     }
+
+    public function recyclebin() {
+        $data = ModelsNotes::onlyTrashed()->get();
+        return view('recyclebin', compact('data'));
+    }
+
+    public function delete_forever($id)  {
+        $note = ModelsNotes::onlyTrashed()->where('id',$id);
+        if ($note) {
+            $note->forceDelete();
+            return redirect()->route('note-lists')->with('success', 'Catatan berhasil dihapus!');
+        } else {
+            return redirect()->route('note-lists')->with('error', 'Catatan tidak ditemukan!');
+        }
+    }
+
+    public function delete_all() {
+        $note = ModelsNotes::onlyTrashed();
+        if ($note) {
+            $note->forceDelete();
+            return redirect()->route('note-lists')->with('success', 'Catatan berhasil dihapus!');
+        } else {
+            return redirect()->route('note-lists')->with('error', 'Catatan tidak ditemukan!');
+        }
+    }
+
+    public function restore_all() {
+        $note = ModelsNotes::onlyTrashed();
+        $note->restore();
+
+        return redirect()->route('note-lists');
+    }
 }
