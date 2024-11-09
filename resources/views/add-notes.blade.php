@@ -26,7 +26,10 @@
         </div>
         <div class="content">
             <label class="label" for="">Content</label>
-            <textarea class="input" name="content" id="" cols="30" rows="10">{{ request()->routeIs('edit-note') ? $data->content : '' }}</textarea>
+            <textarea class="input @error('content') is-danger @enderror" name="content" id="" cols="30" rows="10">{{ request()->routeIs('edit-note') ? $data->content : '' }}</textarea>
+            @error('content')
+            <p class="help is-danger">Tidak boleh kosong!</p>
+            @enderror
         </div>
         <div class="form-group mb-5 mt-5">
             <label class="label">Image</label>
