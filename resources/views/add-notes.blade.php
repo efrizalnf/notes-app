@@ -2,22 +2,41 @@
 @section('container')
 <div class="container mt-2">
     <h1 class="has-text-centered h1 is-size-1">{{ request()->routeIs('edit-note') ? 'EDIT NOTES' : 'TAMBAH NOTES'}}</h1>
-    <form method="POST" action="{{ request()->routeIs('add-note') ? route('save-note') : route('save-edit-note', $data->id)}}" class="field">
+    @if(session()->has('success'))
+    <div class="notification is-success">
+        {{ session()->get('success') }}
+    </div>
+    @endif
+
+    @if(session()->has('error'))
+    <div class="notification is-danger">
+        {{ session()->get('error') }}
+    </div>
+    @endif
+    <form method="POST" action="{{ request()->routeIs('add-note') ? route('save-note') : route('save-edit-note', $data->id)}}" class="field" enctype="multipart/form-data">
+        @csrf
         <div class="title">
             <label class="label" for="title">
                 Title
             </label>
-            <input class="input" type="text" id="title" name="title" value="{{ request()->routeIs('edit-note') ? $data->title : ''}}">
+            <input class="input @error('title') is-danger @enderror" type="text" id="title" name="title" value="{{ request()->routeIs('edit-note') ? $data->title : old('title')}}">
+            @error('title')
+            <p class="help is-danger">Tidak boleh lebih dari 25 char</p>
+            @enderror
         </div>
         <div class="content">
             <label class="label" for="">Content</label>
             <textarea class="input" name="content" id="" cols="30" rows="10">{{ request()->routeIs('edit-note') ? $data->content : '' }}</textarea>
         </div>
+        <div class="form-group mb-5 mt-5">
+            <label class="label">Image</label>
+            <input type="file" name="image" class="form-control" value="{{ request()->routeIs('edit-note') ? $data->image_path : '' }}">
+        </div>
         @csrf
         @if (request()->routeIs('add-note'))
-            @method('POST')
+        @method('POST')
         @elseif (request()->routeIs('edit-note'))
-            @method('PUT')
+        @method('PUT')
         @endif
         <a href="{{ route('note-lists') }}" class="button is-warning">Kembali</a>
         <input type="submit" value="SUBMIT" class="button is-success">

@@ -17,5 +17,6 @@ class Notes extends Model
     protected $fillable = [
         'title',
         'content',
+        'image_path',
     ];
 }
