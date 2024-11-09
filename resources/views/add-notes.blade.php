@@ -1,7 +1,7 @@
 @extends('layout.template')
 @section('container')
 <div class="container mt-2">
-    <h1 class="has-text-centered h1 is-size-1">TAMBAH NOTES</h1>
+    <h1 class="has-text-centered h1 is-size-1">{{ request()->routeIs('edit-note') ? 'EDIT NOTES' : 'TAMBAH NOTES'}}</h1>
     <form method="POST" action="{{ request()->routeIs('add-note') ? route('save-note') : route('save-edit-note', $data->id)}}" class="field">
         <div class="title">
             <label class="label" for="title">

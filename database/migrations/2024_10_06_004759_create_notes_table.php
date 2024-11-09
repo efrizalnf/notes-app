@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('title');
             $table->text('content');
+            $table->string('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,5 +27,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('notes');
+        Schema::table('notes', function (Blueprint $table) {
+            $table->dropColumn('image_path');
+        });
     }
 };

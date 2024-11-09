@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 class Notes extends Controller
 {
+    public function __construct() {
+    }
     // main app
     public function index() {
         $notes = ModelsNotes::all();
@@ -27,8 +29,16 @@ class Notes extends Controller
             'title' => 'required|max:25',
             'content' => 'required'
         ]);
-        ModelsNotes::create($validation);
-        return redirect()->route('note-lists')->with('success', 'Berhasil disimpan!');
+        try {
+           
+            ModelsNotes::create($validation);
+            return redirect()->route('note-lists')->with('success', 'Berhasil disimpan!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput($validation)
+                ->with('error', 'Validasi gagal! Silakan periksa kembali input Anda.');
+        }
 
     }
 
