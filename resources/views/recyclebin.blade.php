@@ -23,22 +23,36 @@
             <th>No</th>
             <th>Title</th>
             <th>Content</th>
+            <th>Image</th>
             <th>Edit</th>
         </tr>
+
+        @if($data->isEmpty())
+        <tr>
+            <td colspan="5" class="has-text-centered w-100 m-auto">No Data!</td>
+        </tr>
+        @else
         @foreach ($data as $note )
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $note->title }}</td>
             <td>{{ $note->content }}</td>
             <td>
+                @if($note->image_path)
+                <img src="{{ asset('storage/images/' . $note->image_path) }}" alt="Image" width="150" height="100">
+                @endif
+            </td>
+            <td>
                 <form method="POST" action="{{ route('delete-forever', $note->id) }}">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="button is-danger m-3" onclick="confirm('Apakah anda yakin mau hapus data?')">Delete</button>
+                    <button type="submit" class="button is-danger m-3" onclick="return confirm('Apakah anda yakin mau hapus data?')">Delete</button>
                 </form>
             </td>
         </tr>
         @endforeach
+        @endif
+
     </table>
 </div>
 @endsection
