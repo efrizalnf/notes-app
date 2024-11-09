@@ -118,9 +118,9 @@ class Notes extends Controller
                 Storage::disk('public')->delete('images/' . $note->image_path);
             }
             $note->forceDelete();
-            return redirect()->route('note-lists')->with('success', 'Catatan berhasil dihapus!');
+            return back()->with('success', 'Catatan berhasil dihapus!');
         } else {
-            return redirect()->route('note-lists')->with('error', 'Catatan tidak ditemukan!');
+            return back()->with('error', 'Catatan tidak ditemukan!');
         }
     }
 

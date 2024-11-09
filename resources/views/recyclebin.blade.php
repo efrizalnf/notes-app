@@ -7,6 +7,17 @@
         <a href="{{ route('delete-all') }}" class="m-3 button is-danger">Delete Semua data</a>
         <a href="{{ route('restore-all') }}" class="m-3 button is-success">Restore Semua data</a>
     </div>
+    @if(session()->has('success'))
+    <div class="notification is-success">
+        {{ session()->get('success') }}
+    </div>
+    @endif
+
+    @if(session()->has('error'))
+    <div class="notification is-danger">
+        {{ session()->get('error') }}
+    </div>
+    @endif
     <table cellpadding="10" border="1" class="table is-bordered">
         <tr>
             <th>No</th>
