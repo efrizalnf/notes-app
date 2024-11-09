@@ -2,12 +2,6 @@
 @section('container')
 
 <div class="container">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-    <!-- {{-- <form action="post" action="{{ route('delete-all') }}">
-    @csrf
-    @method('DELETE')
-    <button type="submit">Delete Semua Data</button>
-    </form> --}} -->
     <div class="btns mt-3 mb-4">
         <a href="{{ route('note-lists') }}" class="m-3 button is-warning">Kembali</a>
         <a href="{{ route('delete-all') }}" class="m-3 button is-danger">Delete Semua data</a>
